@@ -5,6 +5,9 @@
         public Point FirstPoint { get; init; }
         public Point SecondPoint { get; init; }
         public Point ThirdPoint { get; init; }
+
+        public override double Area => CalculateArea();
+
         public Triangle(Point firstPoint, Point secondPoint, Point thirdPoint)
         {
             FirstPoint = firstPoint;
@@ -24,6 +27,15 @@
             var height = maxY - minY;
 
             return new Rectangle(topLeft, width, height);
+        }
+
+        private double CalculateArea()
+        {
+            return 0.5 * Math.Abs(
+                FirstPoint.X * (SecondPoint.Y - ThirdPoint.Y) +
+                SecondPoint.X * (ThirdPoint.Y - FirstPoint.Y) +
+                ThirdPoint.X * (FirstPoint.Y - SecondPoint.Y)
+            );
         }
     }
 }

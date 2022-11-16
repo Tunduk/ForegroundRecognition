@@ -6,7 +6,10 @@ namespace ForegroundRecognition.OverlapDetectors
     {
         public bool IsOverlap(Rectangle firstShape, Rectangle secondShape)
         {
-            throw new NotImplementedException();
+            return firstShape.TopLeft.X < (secondShape.TopLeft.X + secondShape.Width) &&
+                   (firstShape.TopLeft.X + firstShape.Width) > secondShape.TopLeft.X &&
+                   firstShape.TopLeft.Y < (secondShape.TopLeft.Y + secondShape.Height) &&
+                   (firstShape.TopLeft.Y + firstShape.Height) > secondShape.TopLeft.Y;
         }
     }
 }

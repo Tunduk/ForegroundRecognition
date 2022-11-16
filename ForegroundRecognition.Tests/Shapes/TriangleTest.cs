@@ -21,5 +21,17 @@ namespace ForegroundRecognition.Tests.Shapes
             Assert.That(boundingBox.Width, Is.EqualTo(20));
             Assert.That(boundingBox.Height, Is.EqualTo(10));
         }
+
+        [Test]
+        public void CalculateAreaShouldPass()
+        {
+            var triangle = new Triangle(
+                    new Point(10,5),
+                    new Point(20,5),
+                    new Point(15,40)
+                );
+
+            Assert.That(triangle.Area, Is.EqualTo(175));
+        }
     }
 }

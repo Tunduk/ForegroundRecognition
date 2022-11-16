@@ -5,6 +5,8 @@
         public Point StartPoint { get; init; }
         public Point EndPoint { get; init; }
 
+        public override double Area => 1;
+
         public Line(Point startPoint, Point endPoint)
         {
             StartPoint = startPoint;

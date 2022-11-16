@@ -5,6 +5,8 @@
         public double Radius { get; init; }
         public Point Center { get; init; }
 
+        public override double Area => Math.PI * Radius * Radius;
+
         public Circle(Point center, double radius)
         {
             if (radius <= 0)

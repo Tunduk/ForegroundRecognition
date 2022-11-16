@@ -6,6 +6,8 @@
         public double Width { get; init; }
         public double Height { get; init; }
 
+        public override double Area => Width * Height;
+
         public Rectangle(Point topLeft, double width, double height)
         {
             if (height < 0 || width < 0)
