@@ -14,6 +14,13 @@ namespace ForegroundRecognition
             Y = y;
         }
 
+        public double CalculateDistance(Point p)
+        {
+            var xCoordinate = Math.Abs(X - p.X);
+            var yCoordinate = Math.Abs(Y - p.Y);
+            return Math.Sqrt(xCoordinate * xCoordinate + yCoordinate * yCoordinate);
+        }
+
         public object Clone()
         {
             return new Point(X, Y);

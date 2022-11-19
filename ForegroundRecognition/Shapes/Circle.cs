@@ -19,6 +19,7 @@
             Center = center;
         }
 
+
         public override Rectangle GetBoundingBox()
         {
             var leftTopPoint = new Point(Center.X - Radius, Center.Y - Radius);

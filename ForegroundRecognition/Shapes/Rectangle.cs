@@ -18,6 +18,13 @@
             Height = height;
         }
 
+        //public override Point GetCenter()
+        //{
+        //    var centerX = TopLeft.X + Width / 2;
+        //    var centerY = TopLeft.Y + Height / 2;
+        //    return new Point(centerX, centerY);
+        //}
+
         public override Rectangle GetBoundingBox()
         {
             return new Rectangle((Point)TopLeft.Clone(), Width, Height);

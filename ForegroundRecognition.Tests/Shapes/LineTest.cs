@@ -13,7 +13,7 @@ namespace ForegroundRecognition.Tests.Shapes
 
             Assert.That(boundingBox.TopLeft.X, Is.EqualTo(1));
             Assert.That(boundingBox.TopLeft.Y, Is.EqualTo(1));
-            Assert.That(boundingBox.Width, Is.EqualTo(1));
+            Assert.That(boundingBox.Width, Is.EqualTo(0));
             Assert.That(boundingBox.Height, Is.EqualTo(9));
         }
         
@@ -27,7 +27,7 @@ namespace ForegroundRecognition.Tests.Shapes
             Assert.That(boundingBox.TopLeft.X, Is.EqualTo(1));
             Assert.That(boundingBox.TopLeft.Y, Is.EqualTo(1));
             Assert.That(boundingBox.Width, Is.EqualTo(9));
-            Assert.That(boundingBox.Height, Is.EqualTo(1));
+            Assert.That(boundingBox.Height, Is.EqualTo(0));
         }
 
         [Test]

@@ -24,11 +24,6 @@
             var width = maxX - minX;
             var height = maxY - minY;
 
-            if(width == 0)
-                width = 1;
-            if (height == 0)
-                height = 1;
-
             return new Rectangle(topLeft, width, height);
         }
     }

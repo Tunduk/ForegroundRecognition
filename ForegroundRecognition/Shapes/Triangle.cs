@@ -15,6 +15,13 @@
             ThirdPoint = thirdPoint;
         }
 
+        //public override Point GetCenter()
+        //{
+        //    var centerX = (FirstPoint.X + SecondPoint.X + ThirdPoint.X) / 3;
+        //    var centerY = (FirstPoint.Y + SecondPoint.Y + ThirdPoint.Y) / 3;
+        //    return new Point(centerX, centerY);
+        //}
+
         public override Rectangle GetBoundingBox()
         {
             var minX = Math.Min(Math.Min(FirstPoint.X, SecondPoint.X), ThirdPoint.X);
