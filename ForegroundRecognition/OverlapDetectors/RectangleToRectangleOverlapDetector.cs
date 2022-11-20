@@ -2,9 +2,9 @@
 
 namespace ForegroundRecognition.OverlapDetectors
 {
-    internal class RectangleToRectangleOverlapDetector : IOverlapDetector<Rectangle, Rectangle>
+    internal static class RectangleToRectangleOverlapDetector
     {
-        public bool IsOverlap(Rectangle firstShape, Rectangle secondShape)
+        public static bool IsOverlap(Rectangle firstShape, Rectangle secondShape)
         {
             return firstShape.TopLeft.X < (secondShape.TopLeft.X + secondShape.Width) &&
                    (firstShape.TopLeft.X + firstShape.Width) > secondShape.TopLeft.X &&

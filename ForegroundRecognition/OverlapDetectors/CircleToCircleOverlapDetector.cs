@@ -2,9 +2,9 @@
 
 namespace ForegroundRecognition.OverlapDetectors
 {
-    internal class CircleToCircleOverlapDetector : IOverlapDetector<Circle, Circle>
+    internal static class CircleToCircleOverlapDetector 
     {
-        public bool IsOverlap(Circle firstShape, Circle secondShape)
+        public static bool IsOverlap(Circle firstShape, Circle secondShape)
         {
             var distanceBeetwenCenters = firstShape.Center.CalculateDistance(secondShape.Center);
             if (distanceBeetwenCenters < firstShape.Radius + secondShape.Radius)

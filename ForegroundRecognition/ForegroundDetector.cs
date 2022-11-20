@@ -5,7 +5,6 @@ namespace ForegroundRecognition
 {
     public class ForegroundDetector
     {
-        private readonly static IOverlapDetector<Rectangle, Rectangle> _boundingBoxDetector = new RectangleToRectangleOverlapDetector();
         public IEnumerable<Shape> FindForegroundShapes(IReadOnlyCollection<Shape> shapes)
         {
             return FindForegroundShapesInternal(shapes, int.MaxValue, 0);
@@ -37,87 +36,30 @@ namespace ForegroundRecognition
             {
                 var shape = shapesArray[i];
                 var shapeBoundingBox = shape.GetBoundingBox();
-                var isForegound = true;
+                var isForeground = true;
                 foreach (var foregoundShape in foregroundShapes.Values)
                 {
-                    if (_boundingBoxDetector.IsOverlap(shapeBoundingBox, foregoundShape.GetBoundingBox()))
-                    {
-                        if (shape is Circle && foregoundShape is Circle)
+                    if (ShapeToShapeOverlapDetector.IsOverlap(shapeBoundingBox, foregoundShape.GetBoundingBox()))
+                        if (ShapeToShapeOverlapDetector.IsOverlap(shape, foregoundShape))
                         {
-                            var circleToCircle = new CircleToCircleOverlapDetector();
-                            if (circleToCircle.IsOverlap((Circle)shape, (Circle)foregoundShape))
-                            {
-                                isForegound = false;
-                            }
+                            isForeground = false;
+                            break;
                         }
-                        else if (shape is Rectangle && foregoundShape is Circle)
-                        {
-                            var rectangleToCircleDetector = new RectangleToCircleOverlapDetector();
-                            if (rectangleToCircleDetector.IsOverlap((Rectangle)shape, (Circle)foregoundShape))
-                            {
-                                isForegound = false;
-                            }
-                        }
-                        else if (shape is Circle && foregoundShape is Rectangle)
-                        {
-                            var rectangleToCircleDetector = new RectangleToCircleOverlapDetector();
-                            if (rectangleToCircleDetector.IsOverlap((Rectangle)foregoundShape, (Circle)shape))
-                            {
-                                isForegound = false;
-                            }
-                        }
-                        else
-                        {
-                            isForegound = false;
-                        }
-                        break;
-                        //TODO add precise
-                    }
                 }
-                if (isForegound)
-                    //all top and not foreground
+
+                //all top and not foreground
+                if (isForeground)
                     foreach (var position in allPositions.Except(foregroundShapes.Keys).Except(Enumerable.Range(i, shapesArray.Length)))
                     {
-                        if (_boundingBoxDetector.IsOverlap(shapeBoundingBox, shapesArray[position].GetBoundingBox()))
-                        {
-                            if (shape is Circle && shapesArray[position] is Circle)
+                        if (ShapeToShapeOverlapDetector.IsOverlap(shapeBoundingBox, shapesArray[position].GetBoundingBox()))
+                            if (ShapeToShapeOverlapDetector.IsOverlap(shape, shapesArray[position]))
                             {
-                                var circleToCircle = new CircleToCircleOverlapDetector();
-                                if (circleToCircle.IsOverlap((Circle)shape, (Circle)shapesArray[position]))
-                                {
-                                    isForegound = false;
-                                }
+                                isForeground = false;
+                                break;
                             }
-                            else if (shape is Rectangle && shapesArray[position] is Circle)
-                            {
-                                var rectangleToCircleDetector = new RectangleToCircleOverlapDetector();
-                                if (rectangleToCircleDetector.IsOverlap((Rectangle)shape, (Circle)shapesArray[position]))
-                                {
-                                    isForegound = false;
-                                }
-                            }
-                            else if (shape is Circle && shapesArray[position] is Rectangle)
-                            {
-                                var rectangleToCircleDetector = new RectangleToCircleOverlapDetector();
-                                if (rectangleToCircleDetector.IsOverlap((Rectangle)shapesArray[position], (Circle)shape))
-                                {
-                                    isForegound = false;
-                                }
-                            }
-                            else
-                            {
-                                isForegound = false;
-                            }
-                            break;
-                            //TODO add precise
-                        }
                     }
 
-
-
-
-
-                if (isForegound)
+                if (isForeground)
                 {
                     foregroundShapes.Add(i, shape);
                 }

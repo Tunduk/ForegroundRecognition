@@ -4,9 +4,9 @@ using ForegroundRecognition.Shapes;
 
 namespace ForegroundRecognition.OverlapDetectors
 {
-    internal class RectangleToCircleOverlapDetector : IOverlapDetector<Rectangle, Circle>
+    internal static class RectangleToCircleOverlapDetector
     {
-        public bool IsOverlap(Rectangle firstShape, Circle secondShape)
+        public static bool IsOverlap(Rectangle firstShape, Circle secondShape)
         {
             if (IsPointInRectangle(secondShape.Center, firstShape) ||
                 firstShape.TopLeft.CalculateDistance(secondShape.Center) <= secondShape.Radius ||

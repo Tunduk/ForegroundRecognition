@@ -1,21 +1,11 @@
 ﻿using ForegroundRecognition.Shapes;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Media.Media3D;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace ForegroundRecognition.Visualize
@@ -226,16 +216,16 @@ namespace ForegroundRecognition.Visualize
             var offsetY = Canvas.GetTop(uiTriangle);
             var points = uiTriangle.Points;
             return new Triangle(
-                new Point(points[0].X+offsetX, points[0].Y+offsetY),
-                new Point(points[1].X+offsetX, points[1].Y+offsetY),
-                new Point(points[2].X+offsetX, points[2].Y+offsetY)
+                new Point(points[0].X + offsetX, points[0].Y + offsetY),
+                new Point(points[1].X + offsetX, points[1].Y + offsetY),
+                new Point(points[2].X + offsetX, points[2].Y + offsetY)
             );
         }
         private Circle CreateCircleFromUi(Ellipse uiCircle)
         {
             return new Circle(
                 new Point(Canvas.GetLeft(uiCircle) + uiCircle.Height / 2, Canvas.GetTop(uiCircle) + uiCircle.Height / 2),
-                uiCircle.Height/2
+                uiCircle.Height / 2
             );
         }
         private Shapes.Rectangle CreateRectangleFromUi(System.Windows.Shapes.Rectangle uiRectangle)
@@ -249,7 +239,9 @@ namespace ForegroundRecognition.Visualize
         }
         private Shapes.Line CreateLineFromUi(System.Windows.Shapes.Line uiLine)
         {
-            return new Shapes.Line(new Point(uiLine.X1, uiLine.Y1), new Point(uiLine.X2, uiLine.Y2));
+            var offsetX = Canvas.GetLeft(uiLine);
+            var offsetY = Canvas.GetTop(uiLine);
+            return new Shapes.Line(new Point(uiLine.X1 + offsetX, uiLine.Y1 + offsetY), new Point(uiLine.X2 + offsetX, uiLine.Y2 + offsetY));
         }
 
         private void CheckForegroundClick(object sender, RoutedEventArgs e)
@@ -257,13 +249,23 @@ namespace ForegroundRecognition.Visualize
             var foregroundDetector = new ForegroundDetector();
             var foregroundShapes = foregroundDetector.FindForegroundShapes(_shapes.Values.Reverse().ToArray());
             var reversed = _shapes.ToDictionary(x => x.Value, x => x.Key);
-            foreach(var shape in _shapes.Keys)
+            foreach (var shape in _shapes.Keys)
             {
                 shape.Fill = Brushes.White;
+                shape.Stroke = Brushes.Red;
             }
-            foreach(var foregroundShape in foregroundShapes ) 
+            foreach (var foregroundShape in foregroundShapes)
             {
-                reversed[foregroundShape].Fill = Brushes.Green;
+                var shape = reversed[foregroundShape];
+                if (shape is System.Windows.Shapes.Line)
+                {
+                    shape.Stroke = Brushes.Green;
+                }
+                else
+                {
+                    shape.Fill = Brushes.Green;
+                    shape.Stroke = Brushes.Red;
+                }
             }
         }
     }
