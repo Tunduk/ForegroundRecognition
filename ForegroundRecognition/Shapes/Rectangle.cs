@@ -18,6 +18,17 @@
             Height = height;
         }
 
+        public IEnumerable<Line> GetEdges()
+        {
+            var topRight = new Point(TopLeft.X, TopLeft.Y + Width);
+            var bottomRight = new Point(TopLeft.X + Width, TopLeft.Y + Height);
+            var bottomLeft = new Point(TopLeft.X, TopLeft.Y + Height);
+            yield return new Line(TopLeft, topRight);
+            yield return new Line(topRight, bottomRight);
+            yield return new Line(bottomRight, bottomLeft);
+            yield return new Line(bottomLeft, TopLeft);
+        }
+
         //public override Point GetCenter()
         //{
         //    var centerX = TopLeft.X + Width / 2;

@@ -1,5 +1,6 @@
 ﻿
 
+using ForegroundRecognition.GeometryMath;
 using ForegroundRecognition.Shapes;
 
 namespace ForegroundRecognition.OverlapDetectors
@@ -8,26 +9,12 @@ namespace ForegroundRecognition.OverlapDetectors
     {
         public static bool IsOverlap(Rectangle firstShape, Circle secondShape)
         {
-            if (IsPointInRectangle(secondShape.Center, firstShape) ||
-                firstShape.TopLeft.CalculateDistance(secondShape.Center) <= secondShape.Radius ||
-                new Point(firstShape.TopLeft.X + firstShape.Width, firstShape.TopLeft.Y).CalculateDistance(secondShape.Center) <= secondShape.Radius ||
-                new Point(firstShape.TopLeft.X + firstShape.Width, firstShape.TopLeft.Y + firstShape.Height).CalculateDistance(secondShape.Center) <= secondShape.Radius ||
-                new Point(firstShape.TopLeft.X, firstShape.TopLeft.Y + firstShape.Height).CalculateDistance(secondShape.Center) <= secondShape.Radius
-            )
-                return true;
-            return false;
-        }
+            var Xn = Math.Max(firstShape.TopLeft.X, Math.Min(secondShape.Center.X, firstShape.TopLeft.X + firstShape.Width));
+            var Yn = Math.Max(firstShape.TopLeft.Y, Math.Min(secondShape.Center.Y, firstShape.TopLeft.Y + firstShape.Height));
 
-        private static bool IsPointInRectangle(Point point, Rectangle rectange)
-        {
-            if (point.X > rectange.TopLeft.X &&
-                point.X < rectange.TopLeft.X + rectange.Width &&
-                point.Y > rectange.TopLeft.Y &&
-                point.Y < rectange.TopLeft.Y + rectange.Height
-            )
-                return true;
-
-            return false;
+            var Dx = Xn - secondShape.Center.X;
+            var Dy = Yn - secondShape.Center.Y;
+            return (Dx * Dx + Dy * Dy) <= secondShape.Radius * secondShape.Radius;
         }
     }
 }

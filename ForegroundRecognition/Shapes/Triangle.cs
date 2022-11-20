@@ -36,6 +36,20 @@
             return new Rectangle(topLeft, width, height);
         }
 
+        public IEnumerable<Line> GetEdges()
+        {
+            yield return new Line(FirstPoint, SecondPoint);
+            yield return new Line(SecondPoint, ThirdPoint);
+            yield return new Line(ThirdPoint, SecondPoint);
+        }
+
+        public IEnumerable<Point> GetPoints()
+        {
+            yield return FirstPoint;
+            yield return SecondPoint;
+            yield return ThirdPoint;
+        }
+
         private double CalculateArea()
         {
             return 0.5 * Math.Abs(

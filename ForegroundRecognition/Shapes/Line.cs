@@ -1,4 +1,6 @@
-﻿namespace ForegroundRecognition.Shapes
+﻿using ForegroundRecognition.GeometryMath;
+
+namespace ForegroundRecognition.Shapes
 {
     public class Line : Shape
     {
@@ -6,6 +8,8 @@
         public Point EndPoint { get; init; }
 
         public override double Area => 1;
+
+        public double Length => PointMath.DistanceBeetweenPoints(StartPoint, EndPoint);
 
         public Line(Point startPoint, Point endPoint)
         {
