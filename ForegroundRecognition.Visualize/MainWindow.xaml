@@ -18,6 +18,7 @@
         <Canvas Grid.Column="0" Grid.Row="0"
          Name ="MainCanvas" Background="Transparent" />
         <StackPanel Grid.Column="1" Grid.Row="0">
+            <Button Click="CheckForegroundClickAsync">CheckForegroundAsync</Button>
             <Button Click="CheckForegroundClick">CheckForeground</Button>
         </StackPanel>
     </Grid>

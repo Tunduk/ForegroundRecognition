@@ -23,8 +23,8 @@ internal class ForegroundDetectorTest
             new Line(new Point(655.6,45), new Point(665.6,557)),
             new Rectangle(new Point(334.6,281),134,134)
         };
-        var detector = new ForegroundDetector();
-        var result = detector.FindForegroundShapes(shapes.Reverse().ToArray());
+
+        var result = ForegroundDetector.FindForegroundShapes(shapes.Reverse().ToArray());
 
         Assert.That(result.Count(), Is.EqualTo(6));
     }

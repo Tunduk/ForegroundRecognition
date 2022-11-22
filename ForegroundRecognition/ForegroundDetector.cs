@@ -1,5 +1,7 @@
-﻿using ForegroundRecognition.OverlapDetectors;
+﻿using ForegroundRecognition.Extensions;
+using ForegroundRecognition.OverlapDetectors;
 using ForegroundRecognition.Shapes;
+using System.Collections.Generic;
 
 namespace ForegroundRecognition;
 
@@ -12,7 +14,7 @@ public static class ForegroundDetector
 
     public static IEnumerable<Shape> FindForegroundShapes(IList<Shape> shapes, double minimalArea)
     {
-        return FindForegroundShapesInternal(shapes, 0, 0);
+        return FindForegroundShapesInternal(shapes, 0, minimalArea);
     }
 
     public static IEnumerable<Shape> FindForegroundShapes(IList<Shape> shapes, int maxCount)
@@ -25,12 +27,27 @@ public static class ForegroundDetector
         return FindForegroundShapesInternal(shapes, maxCount, minimalArea);
     }
 
-    public static async Task<IEnumerable<Shape>> FindForegroundShapesAsync(IList<Shape> shapes, int maxCount, double minimalArea)
+    public static IAsyncEnumerable<Shape> FindForegroundShapesAsync(IList<Shape> shapes)
     {
-        return await Task.Run(() => { return FindForegroundShapes(shapes, maxCount, minimalArea); });
+        return FindForegroundShapesAsync(shapes, 0, 0);
     }
 
-    private static IEnumerable<Shape> FindForegroundShapesInternal(IList<Shape> shapes, int maxCount = 0, double minimalArea = 0)
+    public static IAsyncEnumerable<Shape> FindForegroundShapesAsync(IList<Shape> shapes, double minimalArea)
+    {
+        return FindForegroundShapesAsync(shapes, 0, minimalArea);
+    }
+
+    public static IAsyncEnumerable<Shape> FindForegroundShapesAsync(IList<Shape> shapes, int maxCount)
+    {
+        return FindForegroundShapesAsync(shapes, maxCount, 0);
+    }
+
+    public static IAsyncEnumerable<Shape> FindForegroundShapesAsync(IList<Shape> shapes, int maxCount, double minimalArea)
+    {
+        return FindForegroundShapes(shapes, maxCount, minimalArea).ToAsyncEnumerable();
+    }
+
+    private static IEnumerable<Shape> FindForegroundShapesInternal(IList<Shape> shapes, int maxCount, double minimalArea)
     {
         var boundingBoxes = shapes.ToDictionary(x => x, x => x.GetBoundingBox());
 

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -244,9 +245,33 @@ public partial class MainWindow : Window
         return new Shapes.Line(new Point(uiLine.X1 + offsetX, uiLine.Y1 + offsetY), new Point(uiLine.X2 + offsetX, uiLine.Y2 + offsetY));
     }
 
+    private async void CheckForegroundClickAsync(object sender, RoutedEventArgs e)
+    {
+        var foregroundShapes = ForegroundDetector.FindForegroundShapesAsync(_shapes.Values.Reverse().ToArray(), 0, 0);
+        var reversed = _shapes.ToDictionary(x => x.Value, x => x.Key);
+        foreach (var shape in _shapes.Keys)
+        {
+            shape.Fill = Brushes.White;
+            shape.Stroke = Brushes.Red;
+        }
+        await foreach (var foregroundShape in foregroundShapes)
+        {
+            var shape = reversed[foregroundShape];
+            if (shape is System.Windows.Shapes.Line)
+            {
+                shape.Stroke = Brushes.Green;
+            }
+            else
+            {
+                shape.Fill = Brushes.Green;
+                shape.Stroke = Brushes.Red;
+            }
+        }
+    }
+
     private void CheckForegroundClick(object sender, RoutedEventArgs e)
     {
-        var foregroundShapes = ForegroundDetector.FindForegroundShapes(_shapes.Values.Reverse().ToArray());
+        var foregroundShapes = ForegroundDetector.FindForegroundShapes(_shapes.Values.Reverse().ToArray(), 0, 0);
         var reversed = _shapes.ToDictionary(x => x.Value, x => x.Key);
         foreach (var shape in _shapes.Keys)
         {
