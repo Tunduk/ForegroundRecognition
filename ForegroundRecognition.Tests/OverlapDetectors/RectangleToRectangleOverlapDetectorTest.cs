@@ -39,18 +39,18 @@ internal class RectangleToRectangleOverlapDetectorTest
     }
 
     [Test]
-    public void BorderingRectanglesShoulReturnFalse()
+    public void BorderingRectanglesShoulReturnTrue()
     {
         var rectangle1 = new Rectangle(new Point(1, 1), 10, 10);
         var rectangle2 = new Rectangle(new Point(11, 1), 10, 10);
 
         var result = RectangleToRectangleOverlapDetector.IsOverlap(rectangle1, rectangle2);
 
-        Assert.IsFalse(result);
+        Assert.IsTrue(result);
     }
 
     [Test]
-    public void OneInsideAnotherShoulReturnFalse()
+    public void OneInsideAnotherShoulReturnTrue()
     {
         var rectangle1 = new Rectangle(new Point(1, 1), 100, 100);
         var rectangle2 = new Rectangle(new Point(11, 1), 10, 10);

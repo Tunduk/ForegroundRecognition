@@ -4,25 +4,6 @@ namespace ForegroundRecognition.Tests.Shapes;
 
 internal class CircleTest
 {
-
-    [Test]
-    public void TryCreateCircleRadiusZeroShouldThrowException()
-    {
-        Assert.Throws<ArgumentException>(() => { new Circle(new Point(10, 10), 0); });
-    }
-
-    [Test]
-    public void TryCreateCircleRadiusBiggerMinimalXShouldThrowException()
-    {
-        Assert.Throws<ArgumentException>(() => { new Circle(new Point(10, 40), 20); });
-    }
-
-    [Test]
-    public void TryCreateCircleRadiusBiggerMinimalYShouldThrowException()
-    {
-        Assert.Throws<ArgumentException>(() => { new Circle(new Point(40, 10), 20); });
-    }
-
     [Test]
     public void CircleBoundingBoxShouldPass()
     {

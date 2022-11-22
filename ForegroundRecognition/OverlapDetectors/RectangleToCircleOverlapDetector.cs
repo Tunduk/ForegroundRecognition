@@ -1,7 +1,4 @@
-﻿
-
-using ForegroundRecognition.GeometryMath;
-using ForegroundRecognition.Shapes;
+﻿using ForegroundRecognition.Shapes;
 
 namespace ForegroundRecognition.OverlapDetectors;
 

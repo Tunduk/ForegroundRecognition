@@ -7,7 +7,7 @@ internal class LineTest
     [Test]
     public void GetBoundingBoxVerticalLine()
     {
-        var line = new Line(new Point(1,1), new Point(1,10));
+        var line = new Line(new Point(1, 1), new Point(1, 10));
 
         var boundingBox = line.GetBoundingBox();
 
@@ -16,7 +16,7 @@ internal class LineTest
         Assert.That(boundingBox.Width, Is.EqualTo(0));
         Assert.That(boundingBox.Height, Is.EqualTo(9));
     }
-    
+
     [Test]
     public void GetBoundingBoxHorizontalLine()
     {
@@ -46,7 +46,7 @@ internal class LineTest
     [Test]
     public void GetBoundingBoxDownToTopLine()
     {
-        var line = new Line(new Point(9, 10),new Point(1, 1));
+        var line = new Line(new Point(9, 10), new Point(1, 1));
 
         var boundingBox = line.GetBoundingBox();
 
@@ -54,5 +54,25 @@ internal class LineTest
         Assert.That(boundingBox.TopLeft.Y, Is.EqualTo(1));
         Assert.That(boundingBox.Width, Is.EqualTo(8));
         Assert.That(boundingBox.Height, Is.EqualTo(9));
+    }
+
+    [Test]
+    public void GetAreaShouldReturnCorrect()
+    {
+        var line = new Line(new Point(0, 0), new Point(0, 10));
+
+        var area = line.GetArea();
+
+        Assert.That(area, Is.EqualTo(10));
+    }
+
+    [Test]
+    public void GetAreaNegativeCoordinatesShouldReturnCorrect()
+    {
+        var line = new Line(new Point(0, 0), new Point(0, -10));
+
+        var area = line.GetArea();
+
+        Assert.That(area, Is.EqualTo(10));
     }
 }

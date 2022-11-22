@@ -8,16 +8,14 @@
        
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-
-        </Grid.RowDefinitions>
         <Canvas Grid.Column="0" Grid.Row="0"
-         Name ="MainCanvas" Background="Transparent" />
-        <StackPanel Grid.Column="1" Grid.Row="0">
+         Name ="MainCanvas" Background="White" />
+        <StackPanel Grid.Column="1" Grid.Row="0" Background="White">
             <Button Click="CheckForegroundClickAsync">CheckForegroundAsync</Button>
             <Button Click="CheckForegroundClick">CheckForeground</Button>
         </StackPanel>

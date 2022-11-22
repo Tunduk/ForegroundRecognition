@@ -24,7 +24,7 @@ internal static class ShapeToShapeOverlapDetector
             (Circle circle, Triangle triangle) => TriangleToCircleOverlapDetector.IsOverlap(triangle, circle),
             (Triangle triangle, Rectangle rectangle) => TriangleToRectangleOverlapDetector.IsOverlap(triangle, rectangle),
             (Rectangle rectangle, Triangle triangle) => TriangleToRectangleOverlapDetector.IsOverlap(triangle, rectangle),
-            _ => true
+            _ => throw new ArgumentException("Not supported shapes")
         };
     }
 }

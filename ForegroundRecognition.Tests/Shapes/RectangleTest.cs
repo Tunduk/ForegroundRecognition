@@ -14,8 +14,27 @@ internal class RectangleTest
         });
     }
 
+    [TestCase(0, 1)]
+    [TestCase(1, 0)]
+    public void RectangleZeroSideShouldPass(double width, double height)
+    {
+        Assert.DoesNotThrow(() =>
+        {
+            new Rectangle(new Point(1, 1), width, height);
+        });
+    }
+
+    [TestCase(5, 10, 50)]
+    [TestCase(6, 7, 42)]
+    public void RectangleAreaShouldReturnPass(double width, double height, double expectedArea)
+    {
+        var rectangle = new Rectangle(new Point(1, 1), width, height);
+        var area = rectangle.GetArea();
+        Assert.That(area, Is.EqualTo(expectedArea));
+    }
+
     [Test]
-    public void CircleBoundingBoxShouldPass()
+    public void RectangleBoundingBoxShouldPass()
     {
         var rectangle = new Rectangle(new Point(10, 10), 20, 30);
 

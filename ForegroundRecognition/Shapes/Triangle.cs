@@ -6,7 +6,7 @@ public class Triangle : Shape
     public Point SecondPoint { get; init; }
     public Point ThirdPoint { get; init; }
 
-    public override double Area => CalculateArea();
+    public override double GetArea() => CalculateArea();
 
     public Triangle(Point firstPoint, Point secondPoint, Point thirdPoint)
     {
@@ -14,13 +14,6 @@ public class Triangle : Shape
         SecondPoint = secondPoint;
         ThirdPoint = thirdPoint;
     }
-
-    //public override Point GetCenter()
-    //{
-    //    var centerX = (FirstPoint.X + SecondPoint.X + ThirdPoint.X) / 3;
-    //    var centerY = (FirstPoint.Y + SecondPoint.Y + ThirdPoint.Y) / 3;
-    //    return new Point(centerX, centerY);
-    //}
 
     public override Rectangle GetBoundingBox()
     {
@@ -40,7 +33,7 @@ public class Triangle : Shape
     {
         yield return new Line(FirstPoint, SecondPoint);
         yield return new Line(SecondPoint, ThirdPoint);
-        yield return new Line(ThirdPoint, SecondPoint);
+        yield return new Line(ThirdPoint, FirstPoint);
     }
 
     public IEnumerable<Point> GetPoints()

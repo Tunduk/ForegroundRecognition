@@ -7,7 +7,7 @@ public class Line : Shape
     public Point StartPoint { get; init; }
     public Point EndPoint { get; init; }
 
-    public override double Area => 1;
+    public override double GetArea() => PointMath.DistanceBeetweenPoints(StartPoint, EndPoint);
 
     public double Length => PointMath.DistanceBeetweenPoints(StartPoint, EndPoint);
 

@@ -6,7 +6,7 @@ public class Rectangle : Shape
     public double Width { get; init; }
     public double Height { get; init; }
 
-    public override double Area => Width * Height;
+    public override double GetArea() => Width * Height;
 
     public Rectangle(Point topLeft, double width, double height)
     {
@@ -29,15 +29,8 @@ public class Rectangle : Shape
         yield return new Line(bottomLeft, TopLeft);
     }
 
-    //public override Point GetCenter()
-    //{
-    //    var centerX = TopLeft.X + Width / 2;
-    //    var centerY = TopLeft.Y + Height / 2;
-    //    return new Point(centerX, centerY);
-    //}
-
     public override Rectangle GetBoundingBox()
     {
-        return new Rectangle((Point)TopLeft.Clone(), Width, Height);
+        return new Rectangle(TopLeft, Width, Height);
     }
 }

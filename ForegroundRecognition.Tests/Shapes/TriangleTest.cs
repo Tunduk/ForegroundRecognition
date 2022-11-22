@@ -4,7 +4,6 @@ namespace ForegroundRecognition.Tests.Shapes;
 
 internal class TriangleTest
 {
-    //TODO Write more tests
     [Test]
     public void GetBoundingBoxShouldPass()
     {
@@ -26,11 +25,55 @@ internal class TriangleTest
     public void CalculateAreaShouldPass()
     {
         var triangle = new Triangle(
-                new Point(10,5),
-                new Point(20,5),
-                new Point(15,40)
+                new Point(10, 5),
+                new Point(20, 5),
+                new Point(15, 40)
             );
 
-        Assert.That(triangle.Area, Is.EqualTo(175));
+        Assert.That(triangle.GetArea(), Is.EqualTo(175));
+    }
+
+    [Test]
+    public void GetTriangleEdgesShouldPass()
+    {
+        var firstPoint = new Point(10, 5);
+        var secondPoint = new Point(20, 5);
+        var thirdPoint = new Point(15, 40);
+
+        var triangle = new Triangle(
+                firstPoint,
+                secondPoint,
+                thirdPoint
+            );
+        var lines = triangle.GetEdges().ToArray();
+
+        Assert.That(AreLinesEqual(lines[0], new Line(firstPoint, secondPoint)));
+        Assert.That(AreLinesEqual(lines[1], new Line(secondPoint, thirdPoint)));
+        Assert.That(AreLinesEqual(lines[2], new Line(thirdPoint, firstPoint)));
+    }
+
+    [Test]
+    public void GetTrianglePointsShouldPass()
+    {
+        var firstPoint = new Point(10, 5);
+        var secondPoint = new Point(20, 5);
+        var thirdPoint = new Point(15, 40);
+
+        var triangle = new Triangle(
+                firstPoint,
+                secondPoint,
+                thirdPoint
+            );
+
+        var points = triangle.GetPoints().ToArray();
+
+        Assert.That(points[0], Is.EqualTo(firstPoint));
+        Assert.That(points[1], Is.EqualTo(secondPoint));
+        Assert.That(points[2], Is.EqualTo(thirdPoint));
+    }
+
+    private bool AreLinesEqual(Line firstLine, Line secondLine)
+    {
+        return firstLine.StartPoint == secondLine.StartPoint && firstLine.EndPoint == secondLine.EndPoint;
     }
 }

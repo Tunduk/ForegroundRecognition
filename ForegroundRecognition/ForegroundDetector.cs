@@ -1,7 +1,6 @@
 ﻿using ForegroundRecognition.Extensions;
 using ForegroundRecognition.OverlapDetectors;
 using ForegroundRecognition.Shapes;
-using System.Collections.Generic;
 
 namespace ForegroundRecognition;
 
@@ -60,7 +59,7 @@ public static class ForegroundDetector
 
             var shape = shapes[i];
 
-            if (minimalArea != 0 && minimalArea >= shape.Area)
+            if (minimalArea != 0 && minimalArea >= shape.GetArea())
                 continue;
 
             if (IsForeground(shape, boundingBoxes, shapes.Take(i)))
@@ -74,7 +73,7 @@ public static class ForegroundDetector
         foreach (var upShape in upShapes)
         {
             var upShapeBoundingBox = boundingBoxes[upShape];
-            if (ShapeToShapeOverlapDetector.IsOverlap(shapeBoundingBox, upShapeBoundingBox))
+            if (RectangleToRectangleOverlapDetector.IsOverlap(shapeBoundingBox, upShapeBoundingBox))
                 if (ShapeToShapeOverlapDetector.IsOverlap(shape, upShape))
                     return false;
         }

@@ -6,7 +6,7 @@ public abstract class Shape
 {
     public abstract Rectangle GetBoundingBox();
 
-    public abstract double Area { get; }
+    public abstract double GetArea();
 
  
 }
