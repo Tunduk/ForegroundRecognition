@@ -6,11 +6,12 @@ internal static class RectangleToCircleOverlapDetector
 {
     public static bool IsOverlap(Rectangle firstShape, Circle secondShape)
     {
-        var Xn = Math.Max(firstShape.TopLeft.X, Math.Min(secondShape.Center.X, firstShape.TopLeft.X + firstShape.Width));
-        var Yn = Math.Max(firstShape.TopLeft.Y, Math.Min(secondShape.Center.Y, firstShape.TopLeft.Y + firstShape.Height));
+        double dx = Math.Abs(secondShape.Center.X - (firstShape.TopLeft.X + firstShape.Width / 2));
+        double dy = Math.Abs(secondShape.Center.Y - (firstShape.TopLeft.Y - firstShape.Height / 2));
 
-        var Dx = Xn - secondShape.Center.X;
-        var Dy = Yn - secondShape.Center.Y;
-        return (Dx * Dx + Dy * Dy) <= secondShape.Radius * secondShape.Radius;
+        if (dx <= 0 || dy <= 0)
+            return true;
+
+        return (dx * dx + dy * dy) <= secondShape.Radius * secondShape.Radius;
     }
 }

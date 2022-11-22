@@ -24,7 +24,7 @@ internal class CircleToLineOverlapDetectorTest
 
         var result = CircleToLineOverlapDetector.IsOverlap(firstCircle, secondCircle);
 
-        Assert.False(result);
+        Assert.IsFalse(result);
     }
 
     [Test]
@@ -35,7 +35,7 @@ internal class CircleToLineOverlapDetectorTest
 
         var result = CircleToLineOverlapDetector.IsOverlap(firstCircle, secondCircle);
 
-        Assert.True(result);
+        Assert.IsTrue(result);
     }
 
     [Test]
@@ -46,7 +46,7 @@ internal class CircleToLineOverlapDetectorTest
 
         var result = CircleToLineOverlapDetector.IsOverlap(firstCircle, secondCircle);
 
-        Assert.True(result);
+        Assert.IsTrue(result);
     }
 
     [Test]
@@ -57,6 +57,6 @@ internal class CircleToLineOverlapDetectorTest
 
         var result = CircleToLineOverlapDetector.IsOverlap(firstCircle, secondCircle);
 
-        Assert.True(result);
+        Assert.IsTrue(result);
     }
 }
