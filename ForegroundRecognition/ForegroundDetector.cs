@@ -1,73 +1,66 @@
 ﻿using ForegroundRecognition.OverlapDetectors;
 using ForegroundRecognition.Shapes;
 
-namespace ForegroundRecognition
+namespace ForegroundRecognition;
+
+public static class ForegroundDetector
 {
-    public class ForegroundDetector
+    public static IEnumerable<Shape> FindForegroundShapes(IList<Shape> shapes)
     {
-        public IEnumerable<Shape> FindForegroundShapes(IReadOnlyCollection<Shape> shapes)
+        return FindForegroundShapesInternal(shapes, 0, 0);
+    }
+
+    public static IEnumerable<Shape> FindForegroundShapes(IList<Shape> shapes, double minimalArea)
+    {
+        return FindForegroundShapesInternal(shapes, 0, 0);
+    }
+
+    public static IEnumerable<Shape> FindForegroundShapes(IList<Shape> shapes, int maxCount)
+    {
+        return FindForegroundShapesInternal(shapes, maxCount, 0);
+    }
+
+    public static IEnumerable<Shape> FindForegroundShapes(IList<Shape> shapes, int maxCount, double minimalArea)
+    {
+        return FindForegroundShapesInternal(shapes, maxCount, minimalArea);
+    }
+
+    public static async Task<IEnumerable<Shape>> FindForegroundShapesAsync(IList<Shape> shapes, int maxCount, double minimalArea)
+    {
+        return await Task.Run(() => { return FindForegroundShapes(shapes, maxCount, minimalArea); });
+    }
+
+    private static IEnumerable<Shape> FindForegroundShapesInternal(IList<Shape> shapes, int maxCount = 0, double minimalArea = 0)
+    {
+        var boundingBoxes = shapes.ToDictionary(x => x, x => x.GetBoundingBox());
+
+        yield return shapes[0];
+        var foundCount = 1;
+        for (var i = 1; i < shapes.Count; i++)
         {
-            return FindForegroundShapesInternal(shapes, int.MaxValue, 0);
-        }
+            if (foundCount == maxCount)
+                yield break;
 
-        public IEnumerable<Shape> FindForegroundShapes(IReadOnlyCollection<Shape> shapes, double minimalArea)
+            var shape = shapes[i];
+
+            if (minimalArea != 0 && minimalArea >= shape.Area)
+                continue;
+
+            if (IsForeground(shape, boundingBoxes, shapes.Take(i)))
+                yield return shape;
+        }
+    }
+
+    private static bool IsForeground(Shape shape, Dictionary<Shape, Rectangle> boundingBoxes, IEnumerable<Shape> upShapes)
+    {
+        var shapeBoundingBox = boundingBoxes[shape];
+        foreach (var upShape in upShapes)
         {
-            return FindForegroundShapesInternal(shapes, int.MaxValue, 0);
+            var upShapeBoundingBox = boundingBoxes[upShape];
+            if (ShapeToShapeOverlapDetector.IsOverlap(shapeBoundingBox, upShapeBoundingBox))
+                if (ShapeToShapeOverlapDetector.IsOverlap(shape, upShape))
+                    return false;
         }
-
-        public IEnumerable<Shape> FindForegroundShapes(IReadOnlyCollection<Shape> shapes, int maxCount)
-        {
-            return FindForegroundShapesInternal(shapes, maxCount, 0);
-        }
-
-        public IEnumerable<Shape> FindForegroundShapes(IReadOnlyCollection<Shape> shapes, int maxCount, double minimalArea)
-        {
-            return FindForegroundShapesInternal(shapes, maxCount, minimalArea);
-        }
-
-        private IEnumerable<Shape> FindForegroundShapesInternal(IReadOnlyCollection<Shape> shapes, int maxCount, double minimalArea)
-        {
-            var foregroundShapes = new Dictionary<int, Shape>();
-
-            var shapesArray = shapes.ToArray();
-            foregroundShapes.Add(0, shapesArray[0]);
-            var allPositions = Enumerable.Range(0, shapesArray.Length);
-            for (var i = 1; i < shapesArray.Length; i++)
-            {
-                var shape = shapesArray[i];
-                var shapeBoundingBox = shape.GetBoundingBox();
-                var isForeground = true;
-                foreach (var foregoundShape in foregroundShapes.Values)
-                {
-                    if (ShapeToShapeOverlapDetector.IsOverlap(shapeBoundingBox, foregoundShape.GetBoundingBox()))
-                        if (ShapeToShapeOverlapDetector.IsOverlap(shape, foregoundShape))
-                        {
-                            isForeground = false;
-                            break;
-                        }
-                }
-
-                //all top and not foreground
-                if (isForeground)
-                    foreach (var position in allPositions.Except(foregroundShapes.Keys).Except(Enumerable.Range(i, shapesArray.Length)))
-                    {
-                        if (ShapeToShapeOverlapDetector.IsOverlap(shapeBoundingBox, shapesArray[position].GetBoundingBox()))
-                            if (ShapeToShapeOverlapDetector.IsOverlap(shape, shapesArray[position]))
-                            {
-                                isForeground = false;
-                                break;
-                            }
-                    }
-
-                if (isForeground)
-                {
-                    foregroundShapes.Add(i, shape);
-                }
-                if (maxCount == foregroundShapes.Count)
-                    break;
-            }
-
-            return foregroundShapes.Values;
-        }
+        return true;
     }
 }

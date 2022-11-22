@@ -1,70 +1,69 @@
 ﻿using ForegroundRecognition.OverlapDetectors;
 using ForegroundRecognition.Shapes;
 
-namespace ForegroundRecognition.Tests.OverlapDetectors
+namespace ForegroundRecognition.Tests.OverlapDetectors;
+
+internal class RectangleToRectangleOverlapDetectorTest
 {
-    internal class RectangleToRectangleOverlapDetectorTest
+    private RectangleToRectangleOverlapDetector _detector;
+    [OneTimeSetUp]
+    public void Setup()
     {
-        private RectangleToRectangleOverlapDetector _detector;
-        [OneTimeSetUp]
-        public void Setup()
-        {
-            _detector = new RectangleToRectangleOverlapDetector();
-        }
+        _detector = new RectangleToRectangleOverlapDetector();
+    }
 
-        [Test]
-        public void EqualsRectanglesOverlapShouldReturnTrue()
-        {
-            var rectangle1 = new Rectangle(new Point(1, 1), 10, 10);
-            var rectangle2 = new Rectangle(new Point(1, 1), 10, 10);
+    [Test]
+    public void EqualsRectanglesOverlapShouldReturnTrue()
+    {
+        var rectangle1 = new Rectangle(new Point(1, 1), 10, 10);
+        var rectangle2 = new Rectangle(new Point(1, 1), 10, 10);
 
-            var result = _detector.IsOverlap(rectangle1, rectangle2);
+        var result = _detector.IsOverlap(rectangle1, rectangle2);
 
-            Assert.IsTrue(result);
-        }
+        Assert.IsTrue(result);
+    }
 
-        [Test]
-        public void PartiallyOverlappingRectanglesShoulReturnTrue()
-        {
-            var rectangle1 = new Rectangle(new Point(1, 1), 10, 10);
-            var rectangle2 = new Rectangle(new Point(5, 5), 10, 10);
+    [Test]
+    public void PartiallyOverlappingRectanglesShoulReturnTrue()
+    {
+        var rectangle1 = new Rectangle(new Point(1, 1), 10, 10);
+        var rectangle2 = new Rectangle(new Point(5, 5), 10, 10);
 
-            var result = _detector.IsOverlap(rectangle1, rectangle2);
+        var result = _detector.IsOverlap(rectangle1, rectangle2);
 
-            Assert.IsTrue(result);
-        }
+        Assert.IsTrue(result);
+    }
 
-        [Test]
-        public void NotOverlappingRectanglesShoulReturnFalse()
-        {
-            var rectangle1 = new Rectangle(new Point(1, 1), 10, 10);
-            var rectangle2 = new Rectangle(new Point(20, 20), 10, 10);
+    [Test]
+    public void NotOverlappingRectanglesShoulReturnFalse()
+    {
+        var rectangle1 = new Rectangle(new Point(1, 1), 10, 10);
+        var rectangle2 = new Rectangle(new Point(20, 20), 10, 10);
 
-            var result = _detector.IsOverlap(rectangle1, rectangle2);
+        var result = _detector.IsOverlap(rectangle1, rectangle2);
 
-            Assert.IsFalse(result);
-        }
+        Assert.IsFalse(result);
+    }
 
-        [Test]
-        public void BorderingRectanglesShoulReturnFalse()
-        {
-            var rectangle1 = new Rectangle(new Point(1, 1), 10, 10);
-            var rectangle2 = new Rectangle(new Point(11, 1), 10, 10);
+    [Test]
+    public void BorderingRectanglesShoulReturnFalse()
+    {
+        var rectangle1 = new Rectangle(new Point(1, 1), 10, 10);
+        var rectangle2 = new Rectangle(new Point(11, 1), 10, 10);
 
-            var result = _detector.IsOverlap(rectangle1, rectangle2);
+        var result = _detector.IsOverlap(rectangle1, rectangle2);
 
-            Assert.IsFalse(result);
-        }
+        Assert.IsFalse(result);
+    }
 
-        [Test]
-        public void OneInsideAnotherShoulReturnFalse()
-        {
-            var rectangle1 = new Rectangle(new Point(1, 1), 100, 100);
-            var rectangle2 = new Rectangle(new Point(11, 1), 10, 10);
+    [Test]
+    public void OneInsideAnotherShoulReturnFalse()
+    {
+        var rectangle1 = new Rectangle(new Point(1, 1), 100, 100);
+        var rectangle2 = new Rectangle(new Point(11, 1), 10, 10);
 
-            var result = _detector.IsOverlap(rectangle1, rectangle2);
+        var result = _detector.IsOverlap(rectangle1, rectangle2);
 
-            Assert.IsTrue(result);
-        }
+        Assert.IsTrue(result);
     }
 }

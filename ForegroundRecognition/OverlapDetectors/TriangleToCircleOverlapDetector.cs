@@ -1,17 +1,16 @@
 ﻿using ForegroundRecognition.GeometryMath;
 using ForegroundRecognition.Shapes;
 
-namespace ForegroundRecognition.OverlapDetectors
+namespace ForegroundRecognition.OverlapDetectors;
+
+internal static class TriangleToCircleOverlapDetector
 {
-    internal static class TriangleToCircleOverlapDetector
+    public static bool IsOverlap(Triangle triangle, Circle circle)
     {
-        public static bool IsOverlap(Triangle triangle, Circle circle)
-        {
-            if (PointMath.IsPointInTriangle(circle.Center, triangle) ||
-                triangle.GetEdges().Any(x => CircleToLineOverlapDetector.IsOverlap(circle, x))
-            )
-                return true;
-            return false;
-        }
+        if (PointMath.IsPointInTriangle(circle.Center, triangle) ||
+            triangle.GetEdges().Any(x => CircleToLineOverlapDetector.IsOverlap(circle, x))
+        )
+            return true;
+        return false;
     }
 }

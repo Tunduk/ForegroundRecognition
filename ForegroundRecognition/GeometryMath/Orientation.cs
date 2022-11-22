@@ -1,9 +1,8 @@
-﻿namespace ForegroundRecognition.GeometryMath
+﻿namespace ForegroundRecognition.GeometryMath;
+
+internal enum Orientation
 {
-    internal enum Orientation
-    {
-        Collinear = 0,
-        Clockwise = 1,
-        CounterClockwise = 2
-    }
+    Collinear = 0,
+    Clockwise = 1,
+    CounterClockwise = 2
 }

@@ -1,34 +1,33 @@
 ﻿using ForegroundRecognition.GeometryMath;
 
-namespace ForegroundRecognition.Shapes
+namespace ForegroundRecognition.Shapes;
+
+public class Line : Shape
 {
-    public class Line : Shape
+    public Point StartPoint { get; init; }
+    public Point EndPoint { get; init; }
+
+    public override double Area => 1;
+
+    public double Length => PointMath.DistanceBeetweenPoints(StartPoint, EndPoint);
+
+    public Line(Point startPoint, Point endPoint)
     {
-        public Point StartPoint { get; init; }
-        public Point EndPoint { get; init; }
+        StartPoint = startPoint;
+        EndPoint = endPoint;
+    }
 
-        public override double Area => 1;
+    public override Rectangle GetBoundingBox()
+    {
+        var minX = Math.Min(StartPoint.X, EndPoint.X);
+        var maxX = Math.Max(StartPoint.X, EndPoint.X);
+        var minY = Math.Min(StartPoint.Y, EndPoint.Y);
+        var maxY = Math.Max(StartPoint.Y, EndPoint.Y);
 
-        public double Length => PointMath.DistanceBeetweenPoints(StartPoint, EndPoint);
+        var topLeft = new Point(minX, minY);
+        var width = maxX - minX;
+        var height = maxY - minY;
 
-        public Line(Point startPoint, Point endPoint)
-        {
-            StartPoint = startPoint;
-            EndPoint = endPoint;
-        }
-
-        public override Rectangle GetBoundingBox()
-        {
-            var minX = Math.Min(StartPoint.X, EndPoint.X);
-            var maxX = Math.Max(StartPoint.X, EndPoint.X);
-            var minY = Math.Min(StartPoint.Y, EndPoint.Y);
-            var maxY = Math.Max(StartPoint.Y, EndPoint.Y);
-
-            var topLeft = new Point(minX, minY);
-            var width = maxX - minX;
-            var height = maxY - minY;
-
-            return new Rectangle(topLeft, width, height);
-        }
+        return new Rectangle(topLeft, width, height);
     }
 }
