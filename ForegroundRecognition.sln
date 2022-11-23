@@ -11,6 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForegroundRecognition.Visua
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForegroundRecognition.RandomGenerator", "ForegroundRecognition.RandomGenerator\ForegroundRecognition.RandomGenerator.csproj", "{FB12B4D3-8A4D-4379-888F-936CF494F818}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D0132BCE-24E9-48E4-8D45-9FAB033D4E81}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

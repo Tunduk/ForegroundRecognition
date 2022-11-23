@@ -6,41 +6,89 @@ namespace ForegroundRecognition;
 
 public static class ForegroundDetector
 {
+    /// <summary>
+    /// Finds all foreground shapes
+    /// </summary>
+    /// <param name="shapes">Collection of shapes in order from botton to top</param>
+    /// <returns>Collection of foreground shapes in order from top to bottom</returns>
     public static IEnumerable<Shape> FindForegroundShapes(IList<Shape> shapes)
     {
         return FindForegroundShapesInternal(shapes, 0, 0);
     }
 
+    /// <summary>
+    /// Finds all foreground shapes whose area is bigger that the minimal threshold
+    /// </summary>
+    /// <param name="shapes">Collection of shapes in order from botton to top</param>
+    /// <param name="minimalArea">Minimal area threshold</param>
+    /// <returns>Collection of foreground shapes in order from top to bottom</returns>
     public static IEnumerable<Shape> FindForegroundShapes(IList<Shape> shapes, double minimalArea)
     {
         return FindForegroundShapesInternal(shapes, 0, minimalArea);
     }
 
+    /// <summary>
+    /// Finds foreground shapes in the amount of no more than maxCount
+    /// </summary>
+    /// <param name="shapes">Collection of shapes in order from botton to top</param>
+    /// <param name="maxCount">Maximum number of recognized shapes</param>
+    /// <returns>Collection of foreground shapes in order from top to bottom</returns>
     public static IEnumerable<Shape> FindForegroundShapes(IList<Shape> shapes, int maxCount)
     {
         return FindForegroundShapesInternal(shapes, maxCount, 0);
     }
 
+    /// <summary>
+    /// Finds foreground shapes in the amount of no more than maxCount and bigger that minimal threshold  
+    /// </summary>
+    /// <param name="shapes">Collection of shapes in order from botton to top</param>
+    /// <param name="maxCount">Maximum number of recognized shapes</param>
+    /// <param name="minimalArea">Minimal area threshold</param>
+    /// <returns>Collection of foreground shapes in order from top to bottom</returns>
     public static IEnumerable<Shape> FindForegroundShapes(IList<Shape> shapes, int maxCount, double minimalArea)
     {
         return FindForegroundShapesInternal(shapes, maxCount, minimalArea);
     }
 
+    /// <summary>
+    /// Finds foreground shapes in the amount of no more than maxCount and bigger that minimal threshold  
+    /// </summary>
+    /// <param name="shapes">Collection of shapes in order from botton to top</param>
+    /// <returns>IAsyncEnumerable of foreground shapes in order from top to bottom</returns>
     public static IAsyncEnumerable<Shape> FindForegroundShapesAsync(IList<Shape> shapes)
     {
         return FindForegroundShapesAsync(shapes, 0, 0);
     }
 
+    /// <summary>
+    /// Finds foreground shapes in the amount of no more than maxCount and bigger that minimal threshold  
+    /// </summary>
+    /// <param name="shapes">Collection of shapes in order from botton to top</param>
+    /// <param name="minimalArea">Minimal area threshold</param>
+    /// <returns>IAsyncEnumerable of foreground shapes in order from top to bottom</returns>
     public static IAsyncEnumerable<Shape> FindForegroundShapesAsync(IList<Shape> shapes, double minimalArea)
     {
         return FindForegroundShapesAsync(shapes, 0, minimalArea);
     }
 
+    /// <summary>
+    /// Finds foreground shapes in the amount of no more than maxCount and bigger that minimal threshold  
+    /// </summary>
+    /// <param name="shapes">Collection of shapes in order from botton to top</param>
+    /// <param name="maxCount">Maximum number of recognized shapes</param>
+    /// <returns>IAsyncEnumerable of foreground shapes in order from top to bottom</returns>
     public static IAsyncEnumerable<Shape> FindForegroundShapesAsync(IList<Shape> shapes, int maxCount)
     {
         return FindForegroundShapesAsync(shapes, maxCount, 0);
     }
 
+    /// <summary>
+    /// Finds foreground shapes in the amount of no more than maxCount and bigger that minimal threshold  
+    /// </summary>
+    /// <param name="shapes">Collection of shapes in order from botton to top</param>
+    /// <param name="maxCount">Maximum number of recognized shapes</param>
+    /// <param name="minimalArea">Minimal area threshold</param>
+    /// <returns>IAsyncEnumerable of foreground shapes in order from top to bottom</returns>
     public static IAsyncEnumerable<Shape> FindForegroundShapesAsync(IList<Shape> shapes, int maxCount, double minimalArea)
     {
         return FindForegroundShapes(shapes, maxCount, minimalArea).ToAsyncEnumerable();
