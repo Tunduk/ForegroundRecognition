@@ -9,7 +9,7 @@ internal class TriangleToRectangleOverlapDetectorTest
     public void TriangleInsideRectangleShouldReturnTrue()
     {
         var triangle = new Triangle(new Point(2, 2), new Point(2, 4), new Point(4, 3));
-        var rectangle = new Rectangle(new Point(0, 10), 10, 10);
+        var rectangle = new Rectangle(new Point(0, 0), 10, 10);
 
         var result = TriangleToRectangleOverlapDetector.IsOverlap(triangle, rectangle);
 
@@ -42,7 +42,7 @@ internal class TriangleToRectangleOverlapDetectorTest
     public void TriangleBorderingRectangleByPointShouldReturnTrue()
     {
         var triangle = new Triangle(new Point(0, 0), new Point(5, 0), new Point(5, 5));
-        var rectangle = new Rectangle(new Point(5, 6), 1, 1);
+        var rectangle = new Rectangle(new Point(5, 5), 1, 1);
 
         var result = TriangleToRectangleOverlapDetector.IsOverlap(triangle, rectangle);
 
@@ -58,5 +58,16 @@ internal class TriangleToRectangleOverlapDetectorTest
         var result = TriangleToRectangleOverlapDetector.IsOverlap(triangle, rectangle);
 
         Assert.IsFalse(result);
+    }
+
+    [Test]
+    public void TriangleOneVertexInRectangleRectangleShouldReturnFalse()
+    {
+        var triangle = new Triangle(new Point(1, 3), new Point(7, 1), new Point(7, 3));
+        var rectangle = new Rectangle(new Point(0, 0), 3, 5);
+
+        var result = TriangleToRectangleOverlapDetector.IsOverlap(triangle, rectangle);
+
+        Assert.True(result);
     }
 }

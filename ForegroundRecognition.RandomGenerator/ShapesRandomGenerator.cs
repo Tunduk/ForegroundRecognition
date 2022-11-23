@@ -16,7 +16,7 @@ public static class ShapesRandomGenerator
 
     private static Shape GetRandomShape()
     {
-        var number = Random.Next(0, 3);
+        var number = Random.Next(0, 4);
         return number switch
         {
             0 => GetRandomCircle(),

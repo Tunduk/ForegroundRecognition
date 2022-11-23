@@ -59,15 +59,4 @@ internal class RectangleToCircleOverlapDetectorTest
 
         Assert.IsFalse(result);
     }
-
-    [Test]
-    public void RandomOverlapRectanleShouldReturnFalse()
-    {
-        var rectangle = new Rectangle(new Point(443, 472), 432, 341);
-        var circle = new Circle(new Point(186, 393), 288);
-
-        var result = RectangleToCircleOverlapDetector.IsOverlap(rectangle, circle);
-
-        Assert.IsTrue(result);
-    }
 }

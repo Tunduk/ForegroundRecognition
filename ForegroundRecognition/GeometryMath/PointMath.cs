@@ -53,8 +53,8 @@ internal static class PointMath
     {
         if (point.X >= rectangle.TopLeft.X &&
             point.X <= rectangle.TopLeft.X + rectangle.Width &&
-            point.Y <= rectangle.TopLeft.Y &&
-            point.Y >= rectangle.TopLeft.Y - rectangle.Height
+            point.Y >= rectangle.TopLeft.Y &&
+            point.Y <= rectangle.TopLeft.Y + rectangle.Height
         )
             return true;
         return false;

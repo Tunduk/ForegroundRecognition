@@ -9,7 +9,7 @@ internal class PointMathTest
     public void IsPointInRectangleShouldReturnTrue()
     {
         var point = new Point(5, 5);
-        var rectangle = new Rectangle(new Point(0, 10), 10, 10);
+        var rectangle = new Rectangle(new Point(0, 0), 10, 10);
 
         var result = PointMath.IsPointInRectangle(point, rectangle);
 

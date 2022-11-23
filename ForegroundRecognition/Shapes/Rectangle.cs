@@ -20,7 +20,7 @@ public class Rectangle : Shape
 
     public IEnumerable<Line> GetEdges()
     {
-        var topRight = new Point(TopLeft.X, TopLeft.Y + Width);
+        var topRight = new Point(TopLeft.X + Width, TopLeft.Y);
         var bottomRight = new Point(TopLeft.X + Width, TopLeft.Y + Height);
         var bottomLeft = new Point(TopLeft.X, TopLeft.Y + Height);
         yield return new Line(TopLeft, topRight);

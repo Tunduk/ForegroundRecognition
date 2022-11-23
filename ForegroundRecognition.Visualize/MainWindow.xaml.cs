@@ -276,7 +276,7 @@ public partial class MainWindow : Window
 
     private void CheckForegroundClick(object sender, RoutedEventArgs e)
     {
-        var foregroundShapes = ForegroundDetector.FindForegroundShapes(_shapes.Values.ToArray(), 0, 6000);
+        var foregroundShapes = ForegroundDetector.FindForegroundShapes(_shapes.Values.ToArray(), 0, 0);
         var reversed = _shapes.ToDictionary(x => x.Value, x => x.Key);
         foreach (var shape in _shapes.Keys)
         {
@@ -300,7 +300,7 @@ public partial class MainWindow : Window
 
     public void GetRandomSetClick(object sender, RoutedEventArgs e)
     {
-        var randomSet = ShapesRandomGenerator.GetRandomSet(10);
+        var randomSet = ShapesRandomGenerator.GetRandomSet(5);
         MainCanvas.Children.Clear();
         _shapes.Clear();
         DrawShapeCollection(randomSet);

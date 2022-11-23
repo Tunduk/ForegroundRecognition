@@ -9,7 +9,7 @@ internal class LineToRectangleOverlapDetectorTest
     public void LineInsideRectangleShouldReturnTrue()
     {
         var line = new Line(new Point(1, 1), new Point(6, 1));
-        var rectangle = new Rectangle(new Point(0, 10), 10, 10);
+        var rectangle = new Rectangle(new Point(0, 0), 10, 10);
 
         var result = LineToRectangleOverlapDetector.IsOverlap(line, rectangle);
 

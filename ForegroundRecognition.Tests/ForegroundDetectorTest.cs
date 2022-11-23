@@ -55,10 +55,8 @@ internal class ForegroundDetectorTest
         Assert.That(result.Count(), Is.EqualTo(maxCount == 0 ? 6 : maxCount));
     }
 
-    [TestCase(2)]
-    [TestCase(4)]
-    [TestCase(0)]
-    public void SampleTestAreaThresholdShouldPass(double maxArea)
+    [Test]
+    public void SampleTestAreaThresholdShouldPass()
     {
         var shapes = new Shape[]
         {
@@ -76,9 +74,9 @@ internal class ForegroundDetectorTest
             new Rectangle(new Point(334.6,281),134,134)
         };
 
-        var result = ForegroundDetector.FindForegroundShapes(shapes, maxCount);
+        var result = ForegroundDetector.FindForegroundShapes(shapes, 6000.0);
 
-        Assert.That(result.Count(), Is.EqualTo(maxCount == 0 ? 6 : maxCount));
+        Assert.That(result.Count(), Is.EqualTo(3));
     }
 
 
