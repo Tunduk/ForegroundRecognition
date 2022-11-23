@@ -19,7 +19,7 @@ internal class RectangleToCircleOverlapDetectorTest
     [Test]
     public void CircleInsideRectanleShouldReturnTrue()
     {
-        var rectangle = new Rectangle(new Point(3, 6), 6, 6);
+        var rectangle = new Rectangle(new Point(3, 0), 6, 6);
         var circle = new Circle(new Point(6, 3), 2);
 
         var result = RectangleToCircleOverlapDetector.IsOverlap(rectangle, circle);
@@ -41,7 +41,7 @@ internal class RectangleToCircleOverlapDetectorTest
     [Test]
     public void CircleBorderingRectanleShouldReturnTrue()
     {
-        var rectangle = new Rectangle(new Point(5, 4), 2, 2);
+        var rectangle = new Rectangle(new Point(5, 2), 2, 2);
         var circle = new Circle(new Point(4, 3), 1);
 
         var result = RectangleToCircleOverlapDetector.IsOverlap(rectangle, circle);
@@ -58,5 +58,16 @@ internal class RectangleToCircleOverlapDetectorTest
         var result = RectangleToCircleOverlapDetector.IsOverlap(rectangle, circle);
 
         Assert.IsFalse(result);
+    }
+
+    [Test]
+    public void RandomOverlapRectanleShouldReturnFalse()
+    {
+        var rectangle = new Rectangle(new Point(443, 472), 432, 341);
+        var circle = new Circle(new Point(186, 393), 288);
+
+        var result = RectangleToCircleOverlapDetector.IsOverlap(rectangle, circle);
+
+        Assert.IsTrue(result);
     }
 }

@@ -1,5 +1,4 @@
-﻿
-using ForegroundRecognition.GeometryMath;
+﻿using ForegroundRecognition.GeometryMath;
 using ForegroundRecognition.Shapes;
 
 namespace ForegroundRecognition.Tests.GeometryMath;
@@ -36,7 +35,6 @@ internal class PointMathTest
         yield return new TestCaseData(new Point(5, 0), new Point(0, 0), new Point(3, 0), Orientation.Collinear);
         yield return new TestCaseData(new Point(3, 0), new Point(5, 0), new Point(0, 0), Orientation.Collinear);
 
-        //TODO add more
         yield return new TestCaseData(new Point(0, 0), new Point(1, 0), new Point(1, 1), Orientation.CounterClockwise);
         yield return new TestCaseData(new Point(0, 0), new Point(4, 4), new Point(1, 2), Orientation.CounterClockwise);
 

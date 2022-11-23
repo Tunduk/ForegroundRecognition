@@ -18,6 +18,7 @@
         <StackPanel Grid.Column="1" Grid.Row="0" Background="White">
             <Button Click="CheckForegroundClickAsync">CheckForegroundAsync</Button>
             <Button Click="CheckForegroundClick">CheckForeground</Button>
+            <Button Click="GetRandomSetClick">GetRandomSet</Button>
         </StackPanel>
     </Grid>
 

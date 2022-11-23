@@ -48,22 +48,26 @@ public static class ForegroundDetector
 
     private static IEnumerable<Shape> FindForegroundShapesInternal(IList<Shape> shapes, int maxCount, double minimalArea)
     {
-        var boundingBoxes = shapes.ToDictionary(x => x, x => x.GetBoundingBox());
+        var reversedShapes = shapes.Reverse().ToArray();
+        var boundingBoxes = reversedShapes.ToDictionary(x => x, x => x.GetBoundingBox());
 
-        yield return shapes[0];
-        var foundCount = 1;
-        for (var i = 1; i < shapes.Count; i++)
+        var foundCount = 0;
+        for (var i = 0; i < reversedShapes.Length; i++)
         {
-            if (foundCount == maxCount)
+            if (maxCount != 0 && foundCount == maxCount)
                 yield break;
 
-            var shape = shapes[i];
+            var shape = reversedShapes[i];
 
             if (minimalArea != 0 && minimalArea >= shape.GetArea())
                 continue;
 
-            if (IsForeground(shape, boundingBoxes, shapes.Take(i)))
+            if (IsForeground(shape, boundingBoxes, reversedShapes.Take(i)))
+            {
+                foundCount++;
                 yield return shape;
+            }
+
         }
     }
 

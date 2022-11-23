@@ -5,11 +5,11 @@ VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForegroundRecognition", "ForegroundRecognition\ForegroundRecognition.csproj", "{BF0D09A4-4318-4E9A-AE0E-4D3E8D9591A9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleRunner", "ConsoleRunner\ConsoleRunner.csproj", "{8BF6C2B9-57B3-4139-8D3C-16B567C52D34}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForegroundRecognition.Tests", "ForegroundRecognition.Tests\ForegroundRecognition.Tests.csproj", "{2C45EE3B-D557-499B-A690-CC75063F4FFB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForegroundRecognition.Visualize", "ForegroundRecognition.Visualize\ForegroundRecognition.Visualize.csproj", "{0FCE5B9F-48CE-4C90-8117-1683C331013B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForegroundRecognition.Visualize", "ForegroundRecognition.Visualize\ForegroundRecognition.Visualize.csproj", "{0FCE5B9F-48CE-4C90-8117-1683C331013B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForegroundRecognition.RandomGenerator", "ForegroundRecognition.RandomGenerator\ForegroundRecognition.RandomGenerator.csproj", "{FB12B4D3-8A4D-4379-888F-936CF494F818}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +21,6 @@ Global
 		{BF0D09A4-4318-4E9A-AE0E-4D3E8D9591A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF0D09A4-4318-4E9A-AE0E-4D3E8D9591A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF0D09A4-4318-4E9A-AE0E-4D3E8D9591A9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8BF6C2B9-57B3-4139-8D3C-16B567C52D34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8BF6C2B9-57B3-4139-8D3C-16B567C52D34}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8BF6C2B9-57B3-4139-8D3C-16B567C52D34}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8BF6C2B9-57B3-4139-8D3C-16B567C52D34}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2C45EE3B-D557-499B-A690-CC75063F4FFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2C45EE3B-D557-499B-A690-CC75063F4FFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C45EE3B-D557-499B-A690-CC75063F4FFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,6 +29,10 @@ Global
 		{0FCE5B9F-48CE-4C90-8117-1683C331013B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0FCE5B9F-48CE-4C90-8117-1683C331013B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0FCE5B9F-48CE-4C90-8117-1683C331013B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB12B4D3-8A4D-4379-888F-936CF494F818}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB12B4D3-8A4D-4379-888F-936CF494F818}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB12B4D3-8A4D-4379-888F-936CF494F818}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB12B4D3-8A4D-4379-888F-936CF494F818}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,5 +1,5 @@
-﻿using ForegroundRecognition.Shapes;
-using System;
+﻿using ForegroundRecognition.RandomGenerator;
+using ForegroundRecognition.Shapes;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -38,6 +38,13 @@ public partial class MainWindow : Window
             new Shapes.Rectangle(new Point(334.6,281),134,134)
         };
 
+        DrawShapeCollection(shapes);
+
+
+    }
+
+    private void DrawShapeCollection(IEnumerable<Shapes.Shape> shapes)
+    {
         foreach (var shape in shapes)
         {
             switch (shape)
@@ -183,7 +190,6 @@ public partial class MainWindow : Window
 
     private void UpdateShape(System.Windows.Shapes.Shape uiShape)
     {
-        //TODO Fix double access
         var shape = _shapes[uiShape];
         switch (shape)
         {
@@ -246,7 +252,7 @@ public partial class MainWindow : Window
 
     private async void CheckForegroundClickAsync(object sender, RoutedEventArgs e)
     {
-        var foregroundShapes = ForegroundDetector.FindForegroundShapesAsync(_shapes.Values.Reverse().ToArray(), 0, 0);
+        var foregroundShapes = ForegroundDetector.FindForegroundShapesAsync(_shapes.Values.ToArray(), 0, 0);
         var reversed = _shapes.ToDictionary(x => x.Value, x => x.Key);
         foreach (var shape in _shapes.Keys)
         {
@@ -270,7 +276,7 @@ public partial class MainWindow : Window
 
     private void CheckForegroundClick(object sender, RoutedEventArgs e)
     {
-        var foregroundShapes = ForegroundDetector.FindForegroundShapes(_shapes.Values.Reverse().ToArray(), 0, 0);
+        var foregroundShapes = ForegroundDetector.FindForegroundShapes(_shapes.Values.ToArray(), 0, 6000);
         var reversed = _shapes.ToDictionary(x => x.Value, x => x.Key);
         foreach (var shape in _shapes.Keys)
         {
@@ -290,5 +296,13 @@ public partial class MainWindow : Window
                 shape.Stroke = Brushes.Red;
             }
         }
+    }
+
+    public void GetRandomSetClick(object sender, RoutedEventArgs e)
+    {
+        var randomSet = ShapesRandomGenerator.GetRandomSet(10);
+        MainCanvas.Children.Clear();
+        _shapes.Clear();
+        DrawShapeCollection(randomSet);
     }
 }
