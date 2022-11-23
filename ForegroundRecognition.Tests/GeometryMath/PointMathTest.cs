@@ -1,10 +1,22 @@
 ﻿
 using ForegroundRecognition.GeometryMath;
+using ForegroundRecognition.Shapes;
 
 namespace ForegroundRecognition.Tests.GeometryMath;
 
 internal class PointMathTest
 {
+    [Test]
+    public void IsPointInRectangleShouldReturnTrue()
+    {
+        var point = new Point(5, 5);
+        var rectangle = new Rectangle(new Point(0, 10), 10, 10);
+
+        var result = PointMath.IsPointInRectangle(point, rectangle);
+
+        Assert.True(result);
+    }
+
     [TestCaseSource(nameof(OrientationTestData))]
     public void CalcOrientationShouldPass(Point point1, Point point2, Point point3, Orientation expectedResult)
     {

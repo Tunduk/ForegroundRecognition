@@ -9,8 +9,6 @@ public class Line : Shape
 
     public override double GetArea() => PointMath.DistanceBeetweenPoints(StartPoint, EndPoint);
 
-    public double Length => PointMath.DistanceBeetweenPoints(StartPoint, EndPoint);
-
     public Line(Point startPoint, Point endPoint)
     {
         StartPoint = startPoint;
