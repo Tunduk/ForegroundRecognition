@@ -45,4 +45,22 @@ internal class RectangleTest
         Assert.That(boundingBox.TopLeft.X, Is.EqualTo(rectangle.TopLeft.X));
         Assert.That(boundingBox.TopLeft.Y, Is.EqualTo(rectangle.TopLeft.Y));
     }
+
+    [Test]
+    public void GetEdgesShouldReturnInClockwise()
+    {
+        var rectangle = new Rectangle(new Point(10, 10), 20, 30);
+
+        var edges = rectangle.GetEdges().ToArray();
+
+        Assert.That(AreLinesEqual(edges[0], new Line(rectangle.TopLeft, new Point(rectangle.TopLeft.X + rectangle.Width, rectangle.TopLeft.Y))));
+        Assert.That(AreLinesEqual(edges[1], new Line(new Point(rectangle.TopLeft.X + rectangle.Width, rectangle.TopLeft.Y), new Point(rectangle.TopLeft.X + rectangle.Width, rectangle.TopLeft.Y + rectangle.Height))));
+        Assert.That(AreLinesEqual(edges[2], new Line(new Point(rectangle.TopLeft.X + rectangle.Width, rectangle.TopLeft.Y + rectangle.Height), new Point(rectangle.TopLeft.X, rectangle.TopLeft.Y + rectangle.Height))));
+        Assert.That(AreLinesEqual(edges[3], new Line(new Point(rectangle.TopLeft.X, rectangle.TopLeft.Y + rectangle.Height), rectangle.TopLeft)));
+    }
+
+    private bool AreLinesEqual(Line firstLine, Line secondLine)
+    {
+        return firstLine.StartPoint == secondLine.StartPoint && firstLine.EndPoint == secondLine.EndPoint;
+    }
 }

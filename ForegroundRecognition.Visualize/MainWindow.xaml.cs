@@ -39,8 +39,6 @@ public partial class MainWindow : Window
         };
 
         DrawShapeCollection(shapes);
-
-
     }
 
     private void DrawShapeCollection(IEnumerable<Shapes.Shape> shapes)
@@ -276,7 +274,7 @@ public partial class MainWindow : Window
 
     private void CheckForegroundClick(object sender, RoutedEventArgs e)
     {
-        var foregroundShapes = ForegroundDetector.FindForegroundShapes(_shapes.Values.ToArray(), 0, 0);
+        var foregroundShapes = ForegroundDetector.FindForegroundShapes(_shapes.Values.ToArray(), 0, 6000.0);
         var reversed = _shapes.ToDictionary(x => x.Value, x => x.Key);
         foreach (var shape in _shapes.Keys)
         {

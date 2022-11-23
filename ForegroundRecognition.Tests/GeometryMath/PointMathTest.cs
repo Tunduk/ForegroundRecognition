@@ -23,6 +23,28 @@ internal class PointMathTest
         Assert.That(result, Is.EqualTo(expectedResult));
     }
 
+    [Test]
+    public void PointOnLineShouldReturnTrue()
+    {
+        var point = new Point(5, 0);
+        var line = new Line(new Point(0, 0), new Point(10, 0));
+
+        var result = PointMath.IsPointOnLine(point, line);
+
+        Assert.IsTrue(result);
+    }
+
+    [Test]
+    public void PointNotOnLineShouldReturnFalse()
+    {
+        var point = new Point(5, 5);
+        var line = new Line(new Point(0, 0), new Point(10, 0));
+
+        var result = PointMath.IsPointOnLine(point, line);
+
+        Assert.IsFalse(result);
+    }
+
     private static IEnumerable<TestCaseData> OrientationTestData()
     {
         yield return new TestCaseData(new Point(0, 0), new Point(5, 5), new Point(3, 3), Orientation.Collinear);
@@ -42,4 +64,3 @@ internal class PointMathTest
         yield return new TestCaseData(new Point(0, 0), new Point(0, 1), new Point(1, 1), Orientation.Clockwise);
     }
 }
-
